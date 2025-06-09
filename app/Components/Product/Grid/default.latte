@@ -1,8 +1,6 @@
-
-
+<div class="container d-flex justify-content-center gap-3">
 {foreach $products as $product}
-<div>
-<h2>{$product->name}</h2>
-<p>{$product->description}</p>
-</div>
+{control 'item-' . $product->id}
 {/foreach}
+
+</div>

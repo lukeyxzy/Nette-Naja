@@ -22,5 +22,9 @@ abstract class baseManager {
     public function getAllLimited(): Selection {
         return $this->getAll()->limit(5);
     }
+
+    public function getById(int $id): ActiveRow {
+        return $this->getAll()->get($id);
+    }
     
 }
