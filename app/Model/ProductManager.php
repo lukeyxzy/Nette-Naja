@@ -10,5 +10,4 @@ class ProductManager extends BaseManager {
     public function getTableName(): string {
         return "product";
     }
-    
-}
+ }
