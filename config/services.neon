@@ -1,16 +1,17 @@
 services:
-	- App\Core\RouterFactory::createRouter
-	- App\Model\Authenticator  
-
+    - App\Core\RouterFactory::createRouter
+    - App\Model\Authenticator  
 
 search:
-	- in: %appDir%
-	  classes:
-	    - *Facade
-	    - *Factory
-	    - *Repository
-	    - *Service
-	model:
-		in: %appDir%/Model
-		classes:
-			- *Manager
+    - in: %appDir%
+      classes:
+        - *Facade
+        - *Factory
+        - *Repository
+        - *Service
+    - in: %appDir%/Model
+      classes:
+        - *Manager
+    - in: %appDir%/Components
+      classes:
+        - *Factory
