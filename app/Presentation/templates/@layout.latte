@@ -12,6 +12,7 @@
 <body>
 	<header class="p-3">
 	<a n:href="Home:default">LOGO</a>
+	<a class="btn btn-primary" n:if="$user->isLoggedIn() && $user->getIdentity()->role == 2" n:href="Product:add">Přidat produkt</a>
 	<a n:if="!$user->isLoggedIn()" n:href="sign:in" class="btn btn-primary">Přihlásit se</a>
 	<a n:if="$user->isLoggedIn()" n:href="sign:out" class="btn btn-primary">Odhlásit se</a>
 	</header>

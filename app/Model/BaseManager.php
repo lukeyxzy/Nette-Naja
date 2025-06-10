@@ -26,5 +26,13 @@ abstract class baseManager {
     public function getById(int $id): ActiveRow {
         return $this->getAll()->get($id);
     }
+
+    public function add(array $values): ActiveRow {
+        return $this->getAll()->insert($values);
+    }
+
+    public function update(int $id, array $values) {
+        return $this->getAll()->where("id", $id)->update($values);
+    }
     
 }
