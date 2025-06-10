@@ -5,9 +5,9 @@ namespace App\Model;
 use Nette\Database\Explorer;
 use Nette\Database\Table\Selection;
 use Nette\Database\Table\ActiveRow;
+use Nette\Application\UI\Presenter;
 
-
-abstract class baseManager {
+abstract class baseManager extends Presenter {
 
 
     public function __construct(private Explorer $explorer) {}

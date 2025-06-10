@@ -25,7 +25,6 @@ class FormFactory {
        return $form;
     }
 
-
     public function onSuccess(Form $form, array $values): void {
       $product_id = $this->product["id"];
 

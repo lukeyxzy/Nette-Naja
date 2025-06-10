@@ -12,13 +12,9 @@ use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait
 final class ProductPresenter extends Presenter
 {
 
-    public function __construct(private ProductManager $productManager) {
+    public function __construct(private ProductManager $productManager) {    }
 
-    }
-    
     public function renderDefault(int $product_id) {}
-    public function renderManipulate(int $product_id) {}
-
     public function checkAccessToManipulate()  {
         if(!$this->getUser()->isLoggedIn()) {
             $this->flashMessage("Pro tuto akci se přihlašte", "error");
@@ -36,7 +32,7 @@ final class ProductPresenter extends Presenter
 
     public function actionEdit(int $product_id) {
         $this->checkAccessToManipulate();
-
+        bdump($product_id);
         $product = $this->productManager->getById($product_id);
 
         if(!$product) {
