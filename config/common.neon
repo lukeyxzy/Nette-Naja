@@ -7,7 +7,8 @@ application:
 	errorPresenter:
 		4xx: Error:Error4xx
 		5xx: Error:Error5xx
-	mapping: App\Presentation\*Presenter
+	mapping: 
+		*: App\*Module\Presentation\*Presenter
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Presentation\AdminModule;
+namespace App\AdminModule\Presentation;
 
 class HomePresenter extends BasePresenter{
 

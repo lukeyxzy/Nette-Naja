@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Presentation\AdminModule\Router;
+namespace App\AdminModule\Router;
 
 use Nette;
 use Nette\Application\Routers\RouteList;

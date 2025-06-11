@@ -6,7 +6,7 @@ namespace App\Core;
 
 use Nette;
 use Nette\Application\Routers\RouteList;
-use App\Presentation\AdminModule\Router\RouterFactory as AdminRouterFactory;
+use App\AdminModule\Router\RouterFactory as AdminRouterFactory;
 
 final class RouterFactory
 {

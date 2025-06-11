@@ -1,8 +1,8 @@
 <?php
 
 
+namespace App\AdminModule\Presentation;
 
-namespace App\Presentation\AdminModule;
 
 use Nette\Application\UI\Presenter;
 
