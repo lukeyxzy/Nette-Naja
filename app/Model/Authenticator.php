@@ -9,7 +9,7 @@ use Nette\Security\Passwords;
 
 class Authenticator implements NetteAuthenticator {
 
-    public function __construct(private UserManager $userManager, private Passwords $passwords) {}
+    public function __construct(private UserManager $userManager, private RoleManager $roleManager, private Passwords $passwords) {}
 
 
 
@@ -29,7 +29,7 @@ class Authenticator implements NetteAuthenticator {
         $user = $activeRow->toArray();
         unset($user["password"]);
 
-        return new SimpleIdentity($activeRow->id, $activeRow->role, $user); 
+        return new SimpleIdentity($activeRow->id, $this->roleManager->getByUserId($activeRow->id), $user); 
     }
 
 

@@ -13,7 +13,7 @@ final class HomePresenter extends Presenter
 {
     
 
-
+    
     use PresenterTrait;
 }
 
