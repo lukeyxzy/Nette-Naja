@@ -5,9 +5,9 @@ namespace App\Model;
 
 
 
-class CommentManager extends BaseManager {
+class ReviewsManager extends BaseManager {
 
     public function getTableName(): string {
-        return "comment";
+        return "review";
     }
 }

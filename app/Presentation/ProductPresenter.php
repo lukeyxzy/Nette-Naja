@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Presentation;
 
-use Nette\Application\UI\Presenter;
 use App\Model\ProductManager;
 use App\Components\Product\Detail\PresenterTrait AS detailPresenterTrait;
 use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait;
 
-final class ProductPresenter extends Presenter
+final class ProductPresenter extends BasePresenter
 {
 
     public function __construct(private ProductManager $productManager) {    }

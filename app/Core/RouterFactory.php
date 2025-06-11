@@ -19,6 +19,7 @@ final class RouterFactory
 		$router->addRoute('editProduct/[<product_id \d+>]', 'Product:edit');
 		$router->addRoute('addProduct/', 'Product:add');
 		$router->addRoute('product/[<product_id \d+>]', 'Product:default');
+		$router->addRoute('category/[<category_id \d+>]', 'Category:default');
 		$router->addRoute('<presenter>/<action>[/<id>]', 'Home:default');
 		return $router;
 	}

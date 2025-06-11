@@ -5,13 +5,14 @@ namespace App\Components\Product\Grid;
 
 trait PresenterTrait {
 
-    private $controlFactory;
-    public function injectControlFactory(ControlFactory $controlFactory) {
-        $this->controlFactory = $controlFactory;
+    private ControlFactory $productGridControlFactory;
+    public function injectProductGridControlFactory(ControlFactory $productGridControlFactory) {
+        $this->productGridControlFactory = $productGridControlFactory;
     }
     
     public function createComponentPostGrid(): Control {
-        return $this->controlFactory->create();
+        $category_id = $this->getParameter("category_id");
+        return $this->productGridControlFactory->create($category_id === null ? 0 : (int) $category_id);
     }
 
 

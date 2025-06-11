@@ -12,7 +12,11 @@
 
 <body>
 	<header class="p-3 d-flex justify-content-between bg-light align-items-center">
-	<div class="left"> <a n:href="Home:default">LOGO</a></div>
+	<div class="left d-flex">
+	<div class="my-auto"> <a n:href="Home:default" class="me-4">LOGO</a> </div>
+	<div class="d-flex"> {control categoryGrid}   </div>
+	
+	</div>
 	<div class="right">
 	<a class="btn btn-success" n:if="$user->isAllowed('product', 'add')" n:href="Product:add">Přidat produkt</a>
 	{if $user->isAllowed('frontSide', 'logout')}

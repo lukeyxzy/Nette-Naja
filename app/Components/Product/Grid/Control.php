@@ -11,8 +11,14 @@ use Nette\Database\Table\Selection;
 class Control extends NetteControl{
 
     private Selection $products;
-    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory) {
-        $this->products = $this->productManager->getAllLimited(5);
+    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory, int $category_id) {
+
+        if($category_id === 0) {
+                    $this->products = $this->productManager->getAllLimited(5);
+        }
+        else {
+                    $this->products = $this->productManager->getbyColumnName("category_id", $category_id);
+        }
     }
   
     public function render():void {
@@ -22,7 +28,7 @@ class Control extends NetteControl{
 
 
 
-    public function createComponentItem() {
+    public function createComponentItem(): Multiplier {
         $products = $this->products;
         $factory = $this->controlFactory;
  

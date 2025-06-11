@@ -34,5 +34,13 @@ abstract class baseManager extends Presenter {
     public function update(int $id, array $values) {
         return $this->getAll()->where("id", $id)->update($values);
     }
+
+    public function getCountByColumnName(string $columnName, string $value) {
+        return $this->getAll()->where($columnName, $value)->count('*'); 
+    }
+
+    public function getbyColumnName(string $columnName, string $value) {
+        return $this->getAll()->where($columnName, $value);
+    }
     
 }
