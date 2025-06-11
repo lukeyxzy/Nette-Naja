@@ -14,25 +14,25 @@ final class ProductPresenter extends Presenter
 
     public function __construct(private ProductManager $productManager) {    }
 
-    public function renderDefault(int $product_id) {}
-    public function checkAccessToManipulate()  {
-        if(!$this->getUser()->isLoggedIn()) {
-            $this->flashMessage("Pro tuto akci se přihlašte", "error");
-            $this->redirect("Sign:in");
-        }
-        if ($this->getUser()->getIdentity()->role != 2) {
-            $this->flashMessage("Nemáte oprávnění na tuto akci", "error");
-            $this->redirect("Sign:in");
+
+
+    public function checkAccess(string $action): void  {
+        if(!$this->user->isAllowed("product", $action)) {
+            $this->flashMessage("Nemáte oprávnění na tuto akci" ,"error");
+            $this->redirect("sign:in");
         }
     }   
+    public function actionDefault(int $product_id):void {
+        $this->checkAccess("view");
+    }
 
-    public function actionAdd() {
-        $this->checkAccessToManipulate();
+    public function actionAdd():void  {
+        $this->checkAccess("add");
     } 
 
-    public function actionEdit(int $product_id) {
-        $this->checkAccessToManipulate();
-        bdump($product_id);
+    public function actionEdit(int $product_id):void {
+        $this->checkAccess("edit");
+
         $product = $this->productManager->getById($product_id);
 
         if(!$product) {

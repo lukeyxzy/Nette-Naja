@@ -29,7 +29,8 @@ class Authenticator implements NetteAuthenticator {
         $user = $activeRow->toArray();
         unset($user["password"]);
 
-        return new SimpleIdentity($activeRow->id, $this->roleManager->getByUserId($activeRow->id), $user); 
+
+        return new SimpleIdentity($activeRow->id, array_values($this->roleManager->getByUserId($activeRow->id)), $user); 
     }
 
 

@@ -11,11 +11,16 @@
 </head>
 
 <body>
-	<header class="p-3">
-	<a n:href="Home:default">LOGO</a>
-	<a class="btn btn-primary" n:if="$user->isLoggedIn() && $user->getIdentity()->role == 2" n:href="Product:add">Přidat produkt</a>
-	<a n:if="!$user->isLoggedIn()" n:href="sign:in" class="btn btn-primary">Přihlásit se</a>
-	<a n:if="$user->isLoggedIn()" n:href="sign:out" class="btn btn-primary">Odhlásit se</a>
+	<header class="p-3 d-flex justify-content-between bg-light align-items-center">
+	<div class="left"> <a n:href="Home:default">LOGO</a></div>
+	<div class="right">
+	<a class="btn btn-success" n:if="$user->isAllowed('product', 'add')" n:href="Product:add">Přidat produkt</a>
+	{if $user->isAllowed('frontSide', 'logout')}
+	<a n:if="$user->isAllowed('frontSide', 'logout')" n:href="sign:out" class="btn btn-primary">Odhlásit se</a>
+	{else}
+	<a n:href="sign:in" class="btn btn-primary">Přihlásit se</a>
+	{/if}
+	</div>	
 	</header>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
