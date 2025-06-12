@@ -1,0 +1,5 @@
+<div class="row justify-content-center">
+{foreach $reviews as $review}
+{control 'item-' . $review->id}
+{/foreach}
+</div>

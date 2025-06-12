@@ -12,10 +12,6 @@ trait PresenterTrait{
 
 
     public function createComponentManipulateProduct(): Control {
-        if(!$this->getUser()->isLoggedIn() && $this->getUser()->getIdentity()->role != 2) {
-            $this->flashMessage("Pro tuto akci se přihlašte", "error");
-            $this->redirect("Sign:in");
-        }
         return $this->manipulateControlFactory->create([$this, "onSuccessManipulate"], $this->product);
     }
 

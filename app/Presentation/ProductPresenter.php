@@ -7,9 +7,15 @@ namespace App\Presentation;
 use App\Model\ProductManager;
 use App\Components\Product\Detail\PresenterTrait AS detailPresenterTrait;
 use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait;
+use App\Components\Product\Review\Add\PresenterTrait AS addReviewPresenterTrait;
+use App\Components\Product\Review\Grid\PresenterTrait AS gridReviewPresenterTrait;
 
 final class ProductPresenter extends BasePresenter
 {
+    use addReviewPresenterTrait;
+    use gridReviewPresenterTrait;
+    use detailPresenterTrait;
+    use manipulatePresenterTrait;
 
     public function __construct(private ProductManager $productManager) {    }
 
@@ -23,6 +29,9 @@ final class ProductPresenter extends BasePresenter
     }   
     public function actionDefault(int $product_id):void {
         $this->checkAccess("view");
+        
+        $this->user_id = $this->user->getIdentity()->id;
+        $this->product_id = $product_id;
     }
 
     public function actionAdd():void  {
@@ -40,7 +49,4 @@ final class ProductPresenter extends BasePresenter
         $this->product = $product->toArray();
     } 
 
-
-    use detailPresenterTrait;
-    use manipulatePresenterTrait;
 }
