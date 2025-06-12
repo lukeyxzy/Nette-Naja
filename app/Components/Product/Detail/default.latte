@@ -4,5 +4,5 @@
 <p>{$product->description}</p>
 <p>{$product->price} </p>
 <p>{$category->name} </p>
-<a class="btn btn-primary" href="{plink product:edit $product->id}">UPRAVIT PRODUKT</a>
+<a n:if="$user->isAllowed('product', 'edit')" class="btn btn-primary" href="{plink product:edit $product->id}">UPRAVIT PRODUKT</a>
 </div>

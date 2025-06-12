@@ -26,8 +26,9 @@
 	{/if}
 	</div>	
 	</header>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-
+	<div class="wrapper position-absolute top-0 start-50 w-25 translate-middle-x mt-3">
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		</div>
 	<div class="container">
 		{include content}
 	</div>

@@ -1,7 +1,6 @@
 {block content}
-
-<h1>Produkty:</h1>
 {if $user->isAllowed("productGrid", "view")}
+<h1>Produkty:</h1>
 {control postGrid}
 {/if}
 

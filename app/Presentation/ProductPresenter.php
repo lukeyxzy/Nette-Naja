@@ -9,6 +9,8 @@ use App\Components\Product\Detail\PresenterTrait AS detailPresenterTrait;
 use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait;
 use App\Components\Product\Review\Add\PresenterTrait AS addReviewPresenterTrait;
 use App\Components\Product\Review\Grid\PresenterTrait AS gridReviewPresenterTrait;
+use Nette\Database\Table\ActiveRow;
+
 
 final class ProductPresenter extends BasePresenter
 {
@@ -19,18 +21,10 @@ final class ProductPresenter extends BasePresenter
 
     public function __construct(private ProductManager $productManager) {    }
 
-
-
-    public function checkAccess(string $action): void  {
-        if(!$this->user->isAllowed("product", $action)) {
-            $this->flashMessage("Nemáte oprávnění na tuto akci" ,"error");
-            $this->redirect("sign:in");
-        }
-    }   
     public function actionDefault(int $product_id):void {
         $this->checkAccess("view");
         
-        $this->user_id = $this->user->getIdentity()->id;
+        $this->user_id = $this->user->getIdentity() !== null ? $this->user->getIdentity()->id : 0;
         $this->product_id = $product_id;
     }
 
@@ -40,13 +34,24 @@ final class ProductPresenter extends BasePresenter
 
     public function actionEdit(int $product_id):void {
         $this->checkAccess("edit");
+        $this->product = $this->checkProductExistence($product_id)->toArray();
+    } 
 
+    private function checkAccess(string $action): void  {
+        if(!$this->user->isAllowed("product", $action)) {
+            $this->flashMessage("Nemáte oprávnění na tuto akci" ,"error");
+            $this->redirect("sign:in");
+        }
+    }   
+    private function checkProductExistence(int $product_id): ActiveRow {
         $product = $this->productManager->getById($product_id);
 
         if(!$product) {
-            $this->error("Produkt neexistuje", 404);
+             $this->error("Tento produkt neexusituje", 404);
         }
-        $this->product = $product->toArray();
-    } 
+
+        return $product;
+    }
+
 
 }

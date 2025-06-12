@@ -1,5 +1,10 @@
 {block content}
 {control productDetail}
+
+{if $user->isAllowed("review", "add")} 
 {control addReview}
+{/if}
+{if $user->isAllowed("reviewGrid", "view")}
 {control reviewsGrid}
+{/if}
 {/block}
