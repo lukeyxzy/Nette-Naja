@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Product\Review\Grid\Item;
+namespace App\Components\User\Review\Grid\Item;
 
 use Nette\Application\UI\Control as NetteControl;
 use Nette\Database\Table\ActiveRow;

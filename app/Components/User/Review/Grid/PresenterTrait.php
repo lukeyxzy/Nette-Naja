@@ -1,17 +1,16 @@
 <?php
-
-namespace App\Components\Product\Review\Grid;
+namespace App\Components\User\Review\Grid;
 
 
 trait PresenterTrait {
 
     private ControlFactory $reviewGridControlFactory;
-    public function injectProductGridControlFactory(ControlFactory $reviewGridControlFactory) {
+    public function injectReviewGridControlFactory(ControlFactory $reviewGridControlFactory) {
         $this->reviewGridControlFactory = $reviewGridControlFactory;
     }
     
     public function createComponentReviewsGrid(): Control {
-        return $this->reviewGridControlFactory->create($this->product_id); 
+        return $this->reviewGridControlFactory->create((int) $this->user_id); 
     }
 
 

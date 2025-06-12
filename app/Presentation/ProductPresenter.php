@@ -7,17 +7,16 @@ namespace App\Presentation;
 use App\Model\ProductManager;
 use App\Components\Product\Detail\PresenterTrait AS detailPresenterTrait;
 use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait;
-use App\Components\Product\Review\Add\PresenterTrait AS addReviewPresenterTrait;
-use App\Components\Product\Review\Grid\PresenterTrait AS gridReviewPresenterTrait;
 use Nette\Database\Table\ActiveRow;
 
 
 final class ProductPresenter extends BasePresenter
 {
-    use addReviewPresenterTrait;
-    use gridReviewPresenterTrait;
+
     use detailPresenterTrait;
     use manipulatePresenterTrait;
+    private int $user_id;
+    private int $product_id;
 
     public function __construct(private ProductManager $productManager) {    }
 
