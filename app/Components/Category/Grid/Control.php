@@ -11,10 +11,8 @@ use Nette\Database\Table\Selection;
 class Control extends NetteControl{
 
     private Selection $categories;
-    private int $category_id;
-    public function __construct(private CategoryManager $categoryManager, private ItemControlFactory $controlFactory, $category_id) {
+    public function __construct(private CategoryManager $categoryManager, private ItemControlFactory $controlFactory) {
         $this->categories = $this->categoryManager->getAll();
-        $this->category_id = $category_id;
     }
   
     public function render():void {

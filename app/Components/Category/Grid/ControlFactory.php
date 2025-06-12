@@ -9,7 +9,7 @@ class ControlFactory {
 
     public function __construct(public CategoryManager $categoryManager, public ItemControlFactory $itemControlFactory) {}
 
-    public function create(int $category_id): Control {
-        return new Control($this->categoryManager, $this->itemControlFactory, $category_id);
+    public function create(): Control {
+        return new Control($this->categoryManager, $this->itemControlFactory);
     }
 }

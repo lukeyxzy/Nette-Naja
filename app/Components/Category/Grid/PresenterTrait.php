@@ -11,8 +11,7 @@ trait PresenterTrait {
     }
     
     public function createComponentCategoryGrid(): Control {
-        $category_id = $this->getParameter("category_id");
-        return $this->controlFactory->create((int) $category_id);
+        return $this->controlFactory->create();
     }
 
 
