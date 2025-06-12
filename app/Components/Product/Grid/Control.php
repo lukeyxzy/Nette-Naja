@@ -11,16 +11,24 @@ use Nette\Database\Table\Selection;
 class Control extends NetteControl{
 
     private Selection $products;
-    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory, int $category_id) {
+    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory, int $category_id, int $user_id) {
 
-        if($category_id === 0) {
-                    $this->products = $this->productManager->getAllLimited(5);
-        }
-        else {
-                    $this->products = $this->productManager->getbyColumnName("category_id", $category_id);
-        }
+        $this->products = $this->getProducts($category_id, $user_id);
     }
   
+    private function getProducts(int $category_id, int $user_id): Selection {
+                if($category_id > 0) {
+                    return $this->productManager->getbyColumnName("category_id", $category_id);
+                }
+                if ($user_id > 0) {
+                    return $this->productManager->getbyColumnName("user_id", $user_id);
+                }
+                else {
+                    return $this->productManager->getAllLimited(5);
+                }
+
+    }
+
     public function render():void {
         $this->template->products = $this->products;
         $this->template->render(__DIR__ . "/default.latte");

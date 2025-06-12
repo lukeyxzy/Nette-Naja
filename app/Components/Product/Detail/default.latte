@@ -2,7 +2,14 @@
 <div>
 <h1>{$product->name}</h1>
 <p>{$product->description}</p>
-<p>{$product->price} </p>
-<p>{$category->name} </p>
+<p>Cena: {$product->price} Kč </p>
+<p>Kategorie: <a href="{plink Category:default $product->category_id}">{$category->name}</a> </p>
 <a n:if="$user->isAllowed('product', 'edit')" class="btn btn-primary" href="{plink product:edit $product->id}">UPRAVIT PRODUKT</a>
+</div>
+
+<div class="bg-light my-5 p-4">
+
+<p>Uživatel: <a href="{plink User:default $product->user->id}">{$product->user->name}</a></p>
+<p>Telefon: <a>{$product->user->tel}</a></p>
+
 </div>

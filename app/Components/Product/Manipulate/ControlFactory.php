@@ -10,7 +10,7 @@ class ControlFactory {
 
     public function __construct(private FormFactory $formFactory, private ProductManager $productManager, private CategoryManager $categoryManager) {}
 
-    public function create(callable $callback, array $product): Control {
-        return new Control($callback, $this->formFactory, $this->productManager, $this->categoryManager, $product);
+    public function create(callable $callback, array $product, int $user_id): Control {
+        return new Control($callback, $this->formFactory, $this->productManager, $this->categoryManager, $product, $user_id);
     }
 }

@@ -10,10 +10,12 @@ use App\Model\CategoryManager;
 class FormFactory {
 
    private array $product;
+   private int $user_id;
     public function __construct(private ProductManager $productManager, private CategoryManager $categoryManager) {}
 
-    public function create(array $product): Form {
+    public function create(array $product, int $user_id): Form {
       $this->product = $product;
+      $this->user_id = $user_id;
        $form = new Form();
        $form->addText("name", "Název: ");
        $form->addText("price", "Cena: ");
@@ -33,6 +35,7 @@ class FormFactory {
       } 
       else 
       {
+         $values["user_id"] = $this->user_id; 
          $this->productManager->add($values);
       }
     }

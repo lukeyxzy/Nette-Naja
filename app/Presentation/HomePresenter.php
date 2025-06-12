@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Presentation;
 
-use App\Components\Product\Grid\PresenterTrait as PostGridPresenterTrait;
+use App\Components\Product\Grid\PresenterTrait as ProductGridPresenterTrait;
 
 
 final class HomePresenter extends BasePresenter
 {
-    use PostGridPresenterTrait;
+    use ProductGridPresenterTrait;
 }
 

@@ -11,7 +11,7 @@ class Control extends NetteControl {
 
     private $callback;
 
-    public function __construct(callable $callback, private FormFactory $formFactory,private ProductManager $productManager, private CategoryManager $categoryManager, private array $product) {
+    public function __construct(callable $callback, private FormFactory $formFactory,private ProductManager $productManager, private CategoryManager $categoryManager, private array $product, private int $user_id) {
         $this->callback = $callback;
     }
 
@@ -22,7 +22,7 @@ class Control extends NetteControl {
 
 
     public function createComponentManipulateForm():Form {
-        $form = $this->formFactory->create($this->product);
+        $form = $this->formFactory->create($this->product, $this->user_id);
         $form->onSuccess[] = $this->callback;
         return $form;
     }
