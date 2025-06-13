@@ -39,18 +39,20 @@ class AuthorizatorFactory {
         $acl->allow("user", "review", "delete");
 
         $acl->allow("user", "product", "add");
-        $acl->allow("user", "product", "edit");
+        $acl->allow("user", "product", "edit", [self::class, "checkEditProduct"]);
         $acl->allow("user", "product", "delete");
 
         $acl->allow("admin");
         return $acl;
     }
 
-    public static function checkEditProduct(Permission $acl, string $role, string $resource, string $privilege) {
+
+    public static function checkEditProduct(Permission $acl, string $role, string $resource, string $privilege): bool {
         $role = $acl->getQueriedRole(); 
         $resource = $acl->getQueriedResource(); 
-        return $role->id === $resource->authorId;
+        return $role->getUserId() === $resource->getUserId();
     }
+
 
 
  }

@@ -18,6 +18,7 @@ class RoleManager extends BaseManager {
 
     }
 
+    
     public function getByUserIdReturnAsEntity(int $id): array {
 
         return array_map(function(string $name) use ($id) { 
@@ -26,8 +27,6 @@ class RoleManager extends BaseManager {
                );
 
     }
-
-
 
 
 

@@ -17,14 +17,17 @@ final class ProductPresenter extends BasePresenter
     use manipulatePresenterTrait;
     private int $user_id;
     private int $product_id;
-
+    private ActiveRow $product;
     public function __construct(private ProductManager $productManager) {    }
 
     public function actionDefault(int $product_id):void {
         $this->checkAccess("view");
-        
-        $this->user_id = $this->user->getIdentity() !== null ? $this->user->getIdentity()->id : 0;
+        $this->product = $this->checkProductExistence($product_id);
         $this->product_id = $product_id;
+
+        $this->productResource = $this->productManager->makeToEntity($this->product);
+
+        $this->user_id = $this->user->getIdentity() !== null ? $this->user->getIdentity()->id : 0;
     }
 
     public function actionAdd():void  {
@@ -33,7 +36,7 @@ final class ProductPresenter extends BasePresenter
 
     public function actionEdit(int $product_id):void {
         $this->checkAccess("edit");
-        $this->product = $this->checkProductExistence($product_id)->toArray();
+        $this->productToArray = $this->checkProductExistence($product_id)->toArray();
     } 
 
     private function checkAccess(string $action): void  {

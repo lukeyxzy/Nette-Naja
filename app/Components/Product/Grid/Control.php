@@ -24,7 +24,7 @@ class Control extends NetteControl{
                     return $this->productManager->getbyColumnName("user_id", $user_id);
                 }
                 else {
-                    return $this->productManager->getAllLimited(5);
+                    return $this->productManager->getAllLimited(5)->order("created_at DESC");
                 }
 
     }

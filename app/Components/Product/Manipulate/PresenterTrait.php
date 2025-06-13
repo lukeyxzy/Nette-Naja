@@ -5,7 +5,7 @@ namespace App\Components\Product\Manipulate;
 trait PresenterTrait{
     
     private ControlFactory $manipulateControlFactory;
-    private array $product = ["id" => 0];
+    private array $productToArray = ["id" => 0];
     public function injectManipulateControlFactory(ControlFactory $controlFactory): void { 
         $this->manipulateControlFactory = $controlFactory;
      }
@@ -13,7 +13,7 @@ trait PresenterTrait{
 
     public function createComponentManipulateProduct(): Control {
         $this->user_id = $this->user->getIdentity()->getId();
-        return $this->manipulateControlFactory->create([$this, "onSuccessManipulate"], $this->product, $this->user_id);
+        return $this->manipulateControlFactory->create([$this, "onSuccessManipulate"], $this->productToArray, $this->user_id);
     }
 
     public function onSuccessManipulate() {
