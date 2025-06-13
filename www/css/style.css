@@ -1,3 +1,8 @@
+body {
+	 font-family: "Quicksand", sans-serif;
+}
+
+
 /* Flash messages */
 .flash {
 	padding: 1rem 1.5rem;
@@ -30,4 +35,21 @@
 @keyframes fadeIn {
 	from { opacity: 0; transform: translateY(-10px); }
 	to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* PRODUCT */
+
+.product-image, .product-detail-image {
+	background-position: center center;
+	background-size: cover;
+}
+
+
+.product-image {
+	height: 22em;
+}
+
+.product-detail-image {
+	height: 35em;
 }

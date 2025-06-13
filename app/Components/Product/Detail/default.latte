@@ -1,15 +1,39 @@
-
+<a n:if="$user->isAllowed('product', 'edit')" class="mb-4 btn btn-primary" href="{plink product:edit $product->id}">UPRAVIT PRODUKT</a>
+<a n:if="$user->isAllowed('product', 'delete')" class="mb-4 btn btn-danger" href="{plink product:edit $product->id}">SMAZAT PRODUKT</a>
 <div>
-<h1>{$product->name}</h1>
-<p>{$product->description}</p>
-<p>Cena: {$product->price} Kč </p>
-<p>Kategorie: <a href="{plink Category:default $product->category_id}">{$category->name}</a> </p>
-<a n:if="$user->isAllowed('product', 'edit')" class="btn btn-primary" href="{plink product:edit $product->id}">UPRAVIT PRODUKT</a>
+    <div class="row">
+        <h1 class="col-6 fw-bold">{$product->name}</h1>
+        <p class="col text-end"><a class="btn btn-success" href="{plink Category:default $product->category_id}">{$category->name}</a> </p>
+    </div>
+<div class="gallery row my-3">
+
+    <div class="main col-10">
+       <div class="w-100 product-detail-image rounded" style="background-image: url('/shop/www/uploads/fallback.jpg')"></div>
+       </div>
+    <div class="aside col-2">
+   <div class="gallery-other-images row row-cols-2 g-3 ">
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
+    <div class="col"><img src="/shop/www/uploads/fallback.jpg" class="img-fluid rounded"></div>
 </div>
+    </div>
+</div>
+<div class="info row">
+    <div class="col-6">
+        <p class="fw-bold">{$product->description|replace: "\n", "<br>"|noescape}</p>
+        <p>Cena: {$product->price} Kč </p>
+    </div>
+    <div class="col-6">
+        <p>Uživatel: <a href="{plink User:default $product->user->id}">{$product->user->name}</a></p>
+        <p>Telefon: <a>{$product->user->tel}</a></p>
+    </div>
 
-<div class="bg-light my-5 p-4">
 
-<p>Uživatel: <a href="{plink User:default $product->user->id}">{$product->user->name}</a></p>
-<p>Telefon: <a>{$product->user->tel}</a></p>
+</div>    
 
 </div>

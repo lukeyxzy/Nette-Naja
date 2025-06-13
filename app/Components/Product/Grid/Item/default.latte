@@ -1,9 +1,13 @@
-<div class="col-3 d-flex justify-content-center flex-wrap">
-    <a href="{plink Product:default $product->id}" class="w-100 text-decoration-none text-black">
-        <div class="d-flex flex-wrap">
-            <h2 class="w-100">{$product->name}</h2>
-            <p class="w-50">{$product->description}</p>
-            <p class="w-50 text-end fw-bold">{$product->price} Kč</p>
-        </div>
-    </a>
-</div>
+
+
+<div class="col-3 justify-content-center product">
+ <a href="{plink Product:default $product->id}" class="w-100 text-decoration-none text-black">
+    <div class="w-100 product-image rounded" style="background-image: url('/shop/www/uploads/fallback.jpg')"></div>
+            <div class="d-flex flex-wrap mt-3">
+                <h2 class="fs-5 w-100 fw-bold">{$product->name}</h2>
+                <p class="w-50 text-muted">{$product->user->name}</p>
+                <p class="w-50 text-end fw-bold">{$product->price} Kč</p>
+            </div>
+        </a>
+    </div>
+
