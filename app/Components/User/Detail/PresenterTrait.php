@@ -12,8 +12,7 @@ trait PresenterTrait{
      
 
     public function createComponentUserDetail(): Control {
-        $user_id = $this->getParameter("user_id");
-        return $this->controlFactory->create((int) $user_id);
+        return $this->controlFactory->create((int) $this->user_id);
     }
 
 }

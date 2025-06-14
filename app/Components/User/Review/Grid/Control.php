@@ -11,8 +11,10 @@ use Nette\Database\Table\Selection;
 class Control extends NetteControl{
 
     private Selection $reviews;
-    public function __construct(private ReviewManager $reviewManager, private ItemControlFactory $controlFactory, int $user_id) {
-        $this->reviews = $this->reviewManager->getByColumnName("user_id", $user_id);
+    private $callback;
+    public function __construct(private ReviewManager $reviewManager, private ItemControlFactory $controlFactory, int $user_id,  callable $callback) {
+        $this->reviews = $this->reviewManager->getByColumnName("reviewed_user_id", $user_id);
+        $this->callback = $callback;
     }
   
     public function render():void {
@@ -25,9 +27,12 @@ class Control extends NetteControl{
     public function createComponentItem(): Multiplier {
         $reviews = $this->reviews;
         $factory = $this->controlFactory;
- 
-        return new Multiplier(function (string $id) use ($reviews, $factory) {
-            return $factory->create($reviews[(int) $id]);
+        $callback = $this->callback;
+
+        return new Multiplier(function (string $id) use ($reviews, $factory, $callback) {
+            $row = $factory->create($reviews[(int) $id], $this->reviewManager);
+            $row->onDelete[] = $callback;
+            return $row;
         });
     }
 

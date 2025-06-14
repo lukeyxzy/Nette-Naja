@@ -5,16 +5,17 @@ namespace App\Components\User\Review\Add;
 trait PresenterTrait{
     
     private ControlFactory $reviewAddControlFactory;
-    private $product_id;
-    private $user_id;
-
     public function injectAddReviewControlFactory(ControlFactory $reviewAddControlFactory): void { 
         $this->reviewAddControlFactory = $reviewAddControlFactory;
      }
 
 
     public function createComponentAddReview(): Control {
-        return $this->reviewAddControlFactory->create([$this, "onSuccessAddReview"], $this->user_id);
+        if(!$this->user->isAllowedTo("review", "add")){
+            $this->error("Nejste oprávněni přidávat recenze", "error");
+        }
+        $logged_in_user_id = $this->user->getIdentity()->id;
+        return $this->reviewAddControlFactory->create([$this, "onSuccessAddReview"], $logged_in_user_id, $this->user_id);
     }
 
     public function onSuccessAddReview() {

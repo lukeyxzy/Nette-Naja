@@ -10,8 +10,16 @@ trait PresenterTrait {
     }
     
     public function createComponentReviewsGrid(): Control {
-        return $this->reviewGridControlFactory->create((int) $this->user_id); 
+        return $this->reviewGridControlFactory->create($this->user_id, [$this, "reviewDeleteCallBack"]); 
     }
+
+
+
+
+    public function reviewDeleteCallBack() {
+        $this->flashMessage("Recenze byla odstraněna.","success");
+        $this->redirect("this");
+    }   
 
 
 }

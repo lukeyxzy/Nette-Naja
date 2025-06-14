@@ -10,7 +10,7 @@
 <p>{$review->user->email}</p>
 </div>
 </a>
-<a href="{plink user:reviewDelete $review->id}" class="btn btn-danger" >VYMAZAT</a>
+<a n:href="reviewDelete!" n:if="$user->isAllowed($reviewResource, 'delete')" class="btn btn-danger" >VYMAZAT</a>
 </div>
 </div>
 </div>

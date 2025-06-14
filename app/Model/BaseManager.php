@@ -6,6 +6,7 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\Selection;
 use Nette\Database\Table\ActiveRow;
 use Nette\Application\UI\Presenter;
+use App\Model\Entity\Resource;
 
 abstract class baseManager extends Presenter {
 
@@ -47,5 +48,14 @@ abstract class baseManager extends Presenter {
     public function delete(int $id): int {
         return $this->getAll()->where("id", $id)->delete();
     }
+
+    
+    
+    public function makeToEntity(ActiveRow $activeRow): Resource {
+
+        return Resource::create($this->getTableName(), $activeRow->user_id);
+
+    }
+
     
 }

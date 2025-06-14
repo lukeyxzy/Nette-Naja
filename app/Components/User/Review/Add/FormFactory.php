@@ -7,11 +7,16 @@ use App\Model\ReviewManager;
 
 class FormFactory {
 
+   // logged In User 
    private int $user_id;
-    public function __construct(private ReviewManager $reviewManager) {}
+   // user who is beeing reviewed
+   private int $reviewed_user_id;
 
-    public function create(int $user_id): Form {
-      $this->user_id = $user_id;
+   public function __construct(private ReviewManager $reviewManager) {}
+
+    public function create(int $loggedInUser_id, int $user_id): Form {
+      $this->user_id = $loggedInUser_id;
+      $this->reviewed_user_id = $user_id;
 
        $form = new Form();
        $form->addTextArea("content", "Recenze: ");
@@ -29,6 +34,7 @@ class FormFactory {
 
     public function onSuccess(Form $form, array $values): void {
       $values["user_id"] = $this->user_id;
+      $values["reviewed_user_id"] = $this->reviewed_user_id;
       $this->reviewManager->add($values);
     }
 
