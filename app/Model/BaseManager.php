@@ -23,7 +23,8 @@ abstract class baseManager extends Presenter {
         return $this->getAll()->limit(5);
     }
 
-    public function getById(int $id): ActiveRow {
+    // Returns null if product doesn´t exist.
+    public function getById(int $id): ?ActiveRow {
         return $this->getAll()->get($id);
     }
 
@@ -41,6 +42,10 @@ abstract class baseManager extends Presenter {
 
     public function getbyColumnName(string $columnName, string $value) {
         return $this->getAll()->where($columnName, $value);
+    }
+
+    public function delete(int $id): int {
+        return $this->getAll()->where("id", $id)->delete();
     }
     
 }

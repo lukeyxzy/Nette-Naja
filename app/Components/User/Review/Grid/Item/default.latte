@@ -1,9 +1,16 @@
-<div class="row">
+<div class="row bg-light rounded my-3 py-3">
 <div class="col-6">
-<p>Celkové hodnocení: {$review->review}</p>
-<span>Recenze: <p> {$review->content}</p></span></div>
-<div class="col-6 justify-content-end d-flex gap-5">
+<p class="fw-bold">Celkové hodnocení: {$review->review}/5</p>
+<span>Recenze: <p class="fw-bold"> {$review->content}</p></span></div>
+<div class="col-6 justify-content-end d-flex">
+<div class="wrapper text-end">
+<a class="text-decoration-none text-black" href="{plink user:default $review->user->id}">
+<div class="user-info d-flex gap-4 fw-bold">
 <p>{$review->user->name}</p>
 <p>{$review->user->email}</p>
+</div>
+</a>
+<a href="{plink user:reviewDelete $review->id}" class="btn btn-danger" >VYMAZAT</a>
+</div>
 </div>
 </div>

@@ -26,6 +26,7 @@
 			</div>
 			<div class="col-6 text-end">
 			<a class="btn btn-success" n:if="$user->isAllowed('product', 'add')" n:href="Product:add">Přidat produkt</a>
+			<a class="btn btn-success" n:if="$user->isAllowed('product', 'add')" n:href="Product:add">Přidat kategorii</a>
 			{if $user->isAllowed('frontSide', 'logout')}
 			<a n:if="$user->isAllowed('frontSide', 'logout')" n:href="sign:out" class="btn btn-primary">Odhlásit se</a>
 			{else}

@@ -17,7 +17,6 @@ class Control extends NetteControl {
 
 
     public function render() {
-
         $this->product = $this->productManager->getById($this->product_id);
 
         $this->template->productResource =  $this->productResource;

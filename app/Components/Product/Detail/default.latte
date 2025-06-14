@@ -1,5 +1,5 @@
 <a n:if="$user->isAllowed($productResource, 'edit')" class="mb-4 btn btn-primary" href="{plink product:edit $product->id}">UPRAVIT PRODUKT</a>
-<a n:if="$user->isAllowed('product', 'delete')" class="mb-4 btn btn-danger" href="{plink product:edit $product->id}">SMAZAT PRODUKT</a>
+<a n:if="$user->isAllowed($productResource, 'delete')" class="mb-4 btn btn-danger" href="{plink product:delete $product->id}">SMAZAT PRODUKT</a>
 <div>
     <div class="row">
         <h1 class="col-6 fw-bold">{$product->name}</h1>
