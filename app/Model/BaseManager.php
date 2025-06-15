@@ -19,11 +19,6 @@ abstract class baseManager extends Presenter {
         return $this->explorer->table($this->getTableName());
     }
 
-
-    public function getAllLimited(): Selection {
-        return $this->getAll()->limit(5);
-    }
-
     // Returns null if product doesn´t exist.
     public function getById(int $id): ?ActiveRow {
         return $this->getAll()->get($id);

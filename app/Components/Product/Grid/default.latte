@@ -1,5 +1,16 @@
-<div class="row justify-content-center">
+<div class="order py-3" n:snippet="orderButtons">
+<a class="{$orderBy == 'created_at DESC' ? 'active' : ''} btn btn-success ajax" n:href="orderBy! value => 'created_at', direction => 'DESC'">Nejnovější</a>
+<a class="{$orderBy == 'created_at ASC' ? 'active' : ''} btn btn-success ajax" n:href="orderBy! value => 'created_at', direction => 'ASC'">Nejstarší</a>
+<a class="{$orderBy == 'price ASC' ? 'active' : ''} btn btn-success ajax" n:href="orderBy! value => 'price', direction => 'ASC'">Nejlevnější</a>
+<a class="{$orderBy == 'price DESC' ? 'active' : ''} btn btn-success ajax" n:href="orderBy! value => 'price', direction => 'DESC'">Nejdražší</a>
+
+</div>
+<div class="row justify-content-center" n:snippet="order"   {if $appendMode}data-ajax-append{/if}>
 {foreach $products as $product}
 {control 'item-' . $product->id}
 {/foreach}
+</div>
+
+<div n:snippet="loadMoreButton">
+<a n:href="loadMore!" class="ajax btn btn-primary my-5">ZOBRAZIT DALŠÍ PRODUKTY</a>
 </div>

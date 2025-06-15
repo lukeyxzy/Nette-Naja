@@ -10,7 +10,12 @@ final class CategoryPresenter extends BasePresenter
 {
     private int $category_id;
 
-    public function renderDefault(int $category_id) {
+
+    
+ use CategoryDetailTrait;
+ use ProductGridTrait;
+
+    public function actionDefault(int $category_id) {
         $this->category_id = $category_id;
     }
 
@@ -19,7 +24,4 @@ final class CategoryPresenter extends BasePresenter
     }
 
 
-
- use CategoryDetailTrait;
- use ProductGridTrait;
 }

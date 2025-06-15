@@ -10,8 +10,21 @@ use Nette\Database\Table\Selection;
 
 class Control extends NetteControl{
 
+    /**
+     * @var string @persistent
+     */
+    public ?string $orderBy = "created_at DESC";
+    /**
+     * @var int @persistent
+     */
+    public int $page = 1;
+    /**
+     * @var bool @persistent
+     */
+    public bool $appendMode = false;
+
     private Selection $products;
-    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory, int $category_id, int $user_id) {
+    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory,  int $category_id,  int $user_id) {
 
         $this->products = $this->getProducts($category_id, $user_id);
     }
@@ -24,16 +37,31 @@ class Control extends NetteControl{
                     return $this->productManager->getbyColumnName("user_id", $user_id);
                 }
                 else {
-                    return $this->productManager->getAllLimited(5)->order("created_at DESC");
+                    return $this->productManager->getAll();
                 }
 
     }
 
     public function render():void {
-        $this->template->products = $this->products;
+        $this->template->products = $this->products->order($this->orderBy)->page($this->page,5);
+        $this->template->appendMode = $this->appendMode;
+        $this->template->orderBy = $this->orderBy;
         $this->template->render(__DIR__ . "/default.latte");
     }
 
+    public function handleOrderBy(string $value, string $direction): void {
+        $this->orderBy = $value . " " . $direction;
+        $this->appendMode = false;
+        $this->redrawControl("order");
+        $this->redrawControl("orderButtons");
+    }
+
+    public function handleLoadMore() {
+        $this->page++;
+        $this->appendMode = true;
+        $this->redrawControl("order");
+        $this->redrawControl("loadMoreButton");
+    }
 
 
     public function createComponentItem(): Multiplier {
