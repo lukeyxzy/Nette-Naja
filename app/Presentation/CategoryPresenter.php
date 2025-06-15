@@ -15,8 +15,8 @@ final class CategoryPresenter extends BasePresenter
  use CategoryDetailTrait;
  use ProductGridTrait;
 
-    public function actionDefault(int $category_id) {
-        $this->category_id = $category_id;
+    public function actionDefault(int $id) {
+        $this->category_id = $id;
     }
 
         protected function getCategoryId(): int {

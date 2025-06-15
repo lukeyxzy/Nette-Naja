@@ -12,8 +12,7 @@ trait PresenterTrait{
 
 
     public function createComponentCategoryDetail(): Control {
-        $category_id = $this->getParameter("category_id");
-        return $this->controlFactory->create((int) $category_id);
+        return $this->controlFactory->create($this->category_id);
     }
 
 

@@ -16,11 +16,11 @@ final class RouterFactory
 	{
 		$router = new RouteList;
 		$router->add(AdminRouterFactory::createRouter());
-		$router->addRoute('editProduct/[<product_id \d+>]', 'Product:edit');
+		$router->addRoute('editProduct/[<id \d+>]', 'Product:edit');
 		$router->addRoute('addProduct/', 'Product:add');
-		$router->addRoute('product/[<product_id \d+>]', 'Product:default');
-		$router->addRoute('category/[<category_id \d+>]', 'Category:default');
-		$router->addRoute('user/[<user_id \d+>]', 'User:default');
+		$router->addRoute('product/[<id \d+>]', 'Product:default');
+		$router->addRoute('category/[<id \d+>]', 'Category:default');
+		$router->addRoute('user/[<id \d+>]', 'User:default');
 		$router->addRoute('<presenter>/<action>[/<id>]', 'Home:default');
 		return $router;
 	}

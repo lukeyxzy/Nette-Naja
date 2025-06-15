@@ -28,7 +28,7 @@ class Control extends NetteControl{
     public function render():void {
         $activeItems = $this->page * 2;
         $this->template->showButton = $activeItems >= $this->numberOfReviews;
-        $this->template->reviews = $this->reviews->page($this->page, 2);
+        $this->template->reviews = $this->reviews->page($this->page, 2)->order("created_at DESC");
         $this->template->numberOfReviews = $this->numberOfReviews;
         $this->template->render(__DIR__ . "/default.latte");
     }
@@ -40,19 +40,19 @@ class Control extends NetteControl{
 
     }
 
-
-    
     public function createComponentItem(): Multiplier {
         $reviews = $this->reviews;
         $factory = $this->controlFactory;
         $callback = $this->callback;
 
-
         return new Multiplier(function (string $id) use ($reviews, $factory, $callback) {
             $row = $factory->create($reviews[(int) $id], $this->reviewManager, $this->loggedInUser);
-            $row->onDelete[] = $callback;
+            $row->onDelete[] = function () use ($callback) {
+                $callback();
+            };
             return $row;
         });
     }
+
 
 }

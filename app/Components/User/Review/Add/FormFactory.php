@@ -19,14 +19,14 @@ class FormFactory {
       $this->reviewed_user_id = $user_post_id;
 
        $form = new Form();
-       $form->addTextArea("content", "Recenze: ");
+       $form->addTextArea("content", "Recenze: ")->setRequired("Toto pole je povinné.");
        $form->addRadioList("review", "Hodnocení:", [
                      5 => "★★★★★",
                      4 => "★★★★☆",
                      3 => "★★★☆☆",
                      2 => "★★☆☆☆",
                      1 => "★☆☆☆☆",
-             ]);
+             ])->setRequired("Toto pole je povinné.");
        $form->addSubmit("send", "Odeslat");
        $form->onSuccess[] = [$this, "onSuccess"];
        return $form;

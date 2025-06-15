@@ -43,7 +43,7 @@ class Control extends NetteControl{
     }
 
     public function render():void {
-        $this->template->products = $this->products->order($this->orderBy)->page($this->page,5);
+        $this->template->products = $this->products->order($this->orderBy)->page($this->page,20);
         $this->template->appendMode = $this->appendMode;
         $this->template->orderBy = $this->orderBy;
         $this->template->render(__DIR__ . "/default.latte");

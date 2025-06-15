@@ -13,11 +13,9 @@ trait PresenterTrait{
     public function injectControlFactory(ControlFactory $controlFactory): void { 
         $this->controlFactory = $controlFactory;
      }
-     
-
+    
     public function createComponentProductDetail(): Control {
-        $product_id = $this->getParameter("product_id");
-        return $this->controlFactory->create($this->productResource, (int) $product_id);
+        return $this->controlFactory->create($this->productResource, $this->product_id);
     }
 
 }

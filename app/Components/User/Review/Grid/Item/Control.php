@@ -27,8 +27,6 @@ class Control extends NetteControl{
             $this->error("Nemáte oprávnění smazat rezecenzi", 404);
         }
 
-
-
         $item_id = $this->item->toArray()["id"];
         $this->reviewManager->delete($item_id);
         $this->onDelete();

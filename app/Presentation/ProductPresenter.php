@@ -24,14 +24,14 @@ final class ProductPresenter extends BasePresenter
 
     public function startup(): void {
         parent::startup();
-        $this->product_id = (int) $this->getParameter("product_id");
+        $this->product_id = (int) $this->getParameter("id");
         if($this->product_id !== 0) {
-        $this->product = $this->checkProductExistence((int) $this->product_id);
+        $this->product = $this->checkProductExistence($this->product_id);
         $this->productResource = $this->productManager->makeToEntity($this->product);
         }
     }
 
-    public function actionDefault(int $product_id):void {
+    public function actionDefault(int $id):void {
             $this->checkAccess($this->productResource, "view");
             $this->user_id = $this->user->getIdentity() !== null ? $this->user->getIdentity()->id : 0;
     }
@@ -63,8 +63,8 @@ final class ProductPresenter extends BasePresenter
             $this->redirect("sign:in");
         }
     }   
-    private function checkProductExistence(int $product_id): ActiveRow {
-        $product = $this->productManager->getById($product_id);
+    private function checkProductExistence(int $id): ActiveRow {
+        $product = $this->productManager->getById($id);
         if(!$product) {
              $this->error("Tento produkt neexistuje.", 404);
         }

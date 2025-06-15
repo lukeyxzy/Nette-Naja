@@ -17,8 +17,8 @@ final class UserPresenter extends BasePresenter
     use gridReviewPresenterTrait;
     use addReviewPresenterTrait;
 
-    public function actionDefault(int $user_id) {
-        $this->user_post_id = $user_id;
+    public function actionDefault(int $id) {
+        $this->user_post_id = $id;
     }
 
     public function actionReviewDelete(int $review_id) {

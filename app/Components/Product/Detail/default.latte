@@ -3,7 +3,7 @@
 <div>
     <div class="row">
         <h1 class="col-6 fw-bold">{$product->name}</h1>
-        <p class="col text-end"><a class="btn btn-success" href="{plink Category:default $product->category_id}">{$category->name}</a> </p>
+        <p class="col text-end"><a class="btn btn-success" href="{plink Category:default $product->category->id}">{$product->category->name}</a> </p>
     </div>
 <div class="gallery row my-3">
 
