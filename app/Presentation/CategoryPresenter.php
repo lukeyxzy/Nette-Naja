@@ -8,10 +8,17 @@ use App\Components\Category\Detail\PresenterTrait as CategoryDetailTrait;
 use App\Components\Product\Grid\PresenterTrait as ProductGridTrait;
 final class CategoryPresenter extends BasePresenter
 {
-    
-    public function renderDefault(int $category_id) {
+    private int $category_id;
 
+    public function renderDefault(int $category_id) {
+        $this->category_id = $category_id;
     }
+
+        protected function getCategoryId(): int {
+        return $this->category_id;
+    }
+
+
 
  use CategoryDetailTrait;
  use ProductGridTrait;

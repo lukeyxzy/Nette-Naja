@@ -14,10 +14,12 @@ trait PresenterTrait {
         return 0;
     }
 
-    public function createComponentPostGrid(): Control {
-        $category_id = $this->getParameter("category_id");
+    protected function getCategoryId(): int {
+        return 0;
+    }
 
-        return $this->productGridControlFactory->create($category_id === null ? 0 : (int) $category_id, $this->getUserId());
+    public function createComponentPostGrid(): Control {
+        return $this->productGridControlFactory->create($this->getCategoryId(), $this->getUserId());
     }
 
 

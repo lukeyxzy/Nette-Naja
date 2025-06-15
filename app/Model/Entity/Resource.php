@@ -11,7 +11,7 @@ class Resource implements NetteResource {
         private int $user_id
                 ) {}
 
-    function getResourceId(): string {
+    public function getResourceId(): string {
         return $this->resource_id;
     }
 
@@ -19,6 +19,9 @@ class Resource implements NetteResource {
         return $this->user_id;
     }
 
+    public function setResourceId(string $newResource_id): void {
+        $this->resource_id = $newResource_id;
+    }
 
     public static function create(string $resource_id, int $user_id): static {
         return new static($resource_id, $user_id);

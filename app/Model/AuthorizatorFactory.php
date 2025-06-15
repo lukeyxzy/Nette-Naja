@@ -37,6 +37,7 @@ class AuthorizatorFactory {
         $acl->allow("guest", "category", "view");
 
         $acl->allow("user", "frontSide", "logout");
+    #    $acl->allow("user", "review", "add", [self::class, "checkAddReviewPermission"]);
         $acl->allow("user", "review", "add");
         $acl->allow("user", "review", "delete", [self::class, "checkResourcePermission"]);
 
@@ -55,13 +56,21 @@ class AuthorizatorFactory {
         return $acl;
     }
 
+    // user is able to edit and delete only his products & reviews
 
-    public static function checkResourcePermission(Permission $acl, string $role, string $resource, string $privilege): bool {
+    public static function checkResourcePermission(Permission $acl,  $role,  $resource, string $privilege): bool {
         $role = $acl->getQueriedRole(); 
         $resource = $acl->getQueriedResource(); 
         return $role->getUserId() === $resource->getUserId();
     }
 
-
+    // user doesn´t have ability to review his own account
+/*
+    public static function checkAddReviewPermission(Permission $acl,  $role,  $resource, string $privilege): bool {
+        $role = $acl->getQueriedRole();
+        $resource = $acl->getQueriedResource();
+        return $role->getUserId() !== $resource->getUserId();
+    }
+*/
 
  }

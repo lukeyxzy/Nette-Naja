@@ -2,20 +2,26 @@
 
 namespace App\Components\User\Review\Add;
 
+use App\Model\Entity\Resource;
+use App\Model\UserManager;
+
+
+
 trait PresenterTrait{
     
     private ControlFactory $reviewAddControlFactory;
-    public function injectAddReviewControlFactory(ControlFactory $reviewAddControlFactory): void { 
+    private UserManager $userManager;
+    private Resource $userResource;
+    public function injectAddReviewControlFactory(ControlFactory $reviewAddControlFactory, UserManager $userManager): void { 
         $this->reviewAddControlFactory = $reviewAddControlFactory;
+        $this->userManager = $userManager;
      }
 
 
     public function createComponentAddReview(): Control {
-        if(!$this->user->isAllowedTo("review", "add")){
-            $this->error("Nejste oprávněni přidávat recenze", "error");
-        }
-        $logged_in_user_id = $this->user->getIdentity()->id;
-        return $this->reviewAddControlFactory->create([$this, "onSuccessAddReview"], $logged_in_user_id, $this->user_id);
+
+
+        return $this->reviewAddControlFactory->create([$this, "onSuccessAddReview"],  $this->user, $this->user_post_id);
     }
 
     public function onSuccessAddReview() {

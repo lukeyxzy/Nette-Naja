@@ -7,11 +7,10 @@ use App\Components\User\Detail\PresenterTrait as userDetailPresenterTrait;
 use App\Components\Product\Grid\PresenterTrait as ProductGridPresenterTrait;
 use App\Components\User\Review\Add\PresenterTrait AS addReviewPresenterTrait;
 use App\Components\User\Review\Grid\PresenterTrait AS gridReviewPresenterTrait;
-use Nette\Database\Table\ActiveRow;
 
 final class UserPresenter extends BasePresenter
 {
-    private int $user_id;
+    private int $user_post_id;
 
     use userDetailPresenterTrait;
     use ProductGridPresenterTrait;
@@ -19,7 +18,7 @@ final class UserPresenter extends BasePresenter
     use addReviewPresenterTrait;
 
     public function actionDefault(int $user_id) {
-        $this->user_id = $user_id;
+        $this->user_post_id = $user_id;
     }
 
     public function actionReviewDelete(int $review_id) {
@@ -32,7 +31,7 @@ final class UserPresenter extends BasePresenter
 
 
     protected function getUserId(): int {
-        return $this->user_id;
+        return $this->user_post_id;
     }
 }
 

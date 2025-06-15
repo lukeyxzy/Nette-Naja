@@ -10,7 +10,7 @@ trait PresenterTrait {
     }
     
     public function createComponentReviewsGrid(): Control {
-        return $this->reviewGridControlFactory->create($this->user_id, [$this, "reviewDeleteCallBack"]); 
+        return $this->reviewGridControlFactory->create($this->user_post_id, [$this, "reviewDeleteCallBack"], $this->user); 
     }
 
 
