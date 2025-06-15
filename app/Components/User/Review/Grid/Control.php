@@ -11,20 +11,37 @@ use Nette\Security\User;
 
 class Control extends NetteControl{
 
+    /**
+     * @var int @persistent
+     */
+    public int $page = 1;
+
     private Selection $reviews;
     private $callback;
-    public function __construct(private ReviewManager $reviewManager, private ItemControlFactory $controlFactory, int $user_id,  callable $callback, private User $loggedInUser) {
-        $this->reviews = $this->reviewManager->getByColumnName("reviewed_user_id", $user_id);
+    private int $numberOfReviews;
+    public function __construct(private ReviewManager $reviewManager, private ItemControlFactory $controlFactory, private int $user_id,  callable $callback, private User $loggedInUser) {
         $this->callback = $callback;
+        $this->reviews = $this->reviewManager->getByColumnName("reviewed_user_id", $this->user_id);
+        $this->numberOfReviews = $this->reviews->count("*");
     }
-  
+   
     public function render():void {
-        $this->template->reviews = $this->reviews;
+        $activeItems = $this->page * 2;
+        $this->template->showButton = $activeItems >= $this->numberOfReviews;
+        $this->template->reviews = $this->reviews->page($this->page, 2);
+        $this->template->numberOfReviews = $this->numberOfReviews;
         $this->template->render(__DIR__ . "/default.latte");
     }
 
+    public function handleLoadMore(): void {
+        $this->page++;
+        $this->redrawControl("reviews");
+        $this->redrawControl("reviewsButton");
+
+    }
 
 
+    
     public function createComponentItem(): Multiplier {
         $reviews = $this->reviews;
         $factory = $this->controlFactory;
@@ -37,6 +54,5 @@ class Control extends NetteControl{
             return $row;
         });
     }
-
 
 }

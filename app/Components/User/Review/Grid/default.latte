@@ -1,6 +1,12 @@
-<div class="row justify-content-center">
-<h2>Recenze: </h2>
+<div class="row my-4">
+<h2 class="fs-4 d-flex justify-content-between"><span> Hodnocení uživatele:</span>  <span>({$numberOfReviews} Celkem)</span></h2>
+
+<div class="reviews" n:snippet="reviews" data-ajax-append="true">
 {foreach $reviews as $review}
 {control 'item-' . $review->id}
 {/foreach}
+</div>
+
+<div n:snippet="reviewsButton">
+<a class="btn btn-success w-25 ajax" n:href="loadMore!" n:if="!$showButton">Načíst další recenze</a></div>
 </div>
