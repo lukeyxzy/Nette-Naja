@@ -1,16 +1,11 @@
 <?php
 
-declare(strict_types=1);
+namespace App\FrontModule\Presentation;
 
-namespace App\Presentation;
 
-use App\Components\Category\Grid\PresenterTrait as CategoryTrait;
+trait SecurePresenterTrait{
 
-abstract class BasePresenter extends Presenter{
-
-   use CategoryTrait;
-
-    protected function startup() {
+    public function startup() {
 
     if(!$this->isLinkCurrent("Sign:in") && !$this->user->isAllowed("frontSide", "view")) {
         $this->flashMessage("Prosím přihlašte se.", "error");
@@ -19,6 +14,5 @@ abstract class BasePresenter extends Presenter{
     parent::startup();
     }
 
-    
-}
 
+}

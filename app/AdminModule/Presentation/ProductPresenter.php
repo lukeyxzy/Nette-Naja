@@ -2,11 +2,16 @@
 
 
 namespace App\AdminModule\Presentation;
-use App\Presentation\ProductPresenter as FrontProductPresenter;
+use App\Presentation\ProductPresenter as APProductPresenter;
 
-class ProductPresenter extends FrontProductPresenter {
+class ProductPresenter extends APProductPresenter {
 
     use SecurePresenterTrait;
+
+
+    public function startup() {
+        parent::startup();
+    }
 
 
 }

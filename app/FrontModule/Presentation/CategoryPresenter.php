@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\AdminModule\Presentation;
+namespace App\FrontModule\Presentation;
 
 
 use App\Presentation\CategoryPresenter as ApCategoryPresenter;

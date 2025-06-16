@@ -3,9 +3,9 @@
 
 namespace App\AdminModule\Presentation;
 
-use App\Components\User\Sign\In\PresenterTrait;
+use App\Presentation\SignPresenter as APSignPresenter;
 
-class SignPresenter extends BasePresenter{
+class SignPresenter extends APSignPresenter {
 
-use PresenterTrait;
+    use SecurePresenterTrait;
 }

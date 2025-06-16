@@ -8,7 +8,7 @@ use App\Components\Product\Grid\PresenterTrait as ProductGridPresenterTrait;
 use App\Components\User\Review\Add\PresenterTrait AS addReviewPresenterTrait;
 use App\Components\User\Review\Grid\PresenterTrait AS gridReviewPresenterTrait;
 
-class UserPresenter extends BasePresenter
+abstract class UserPresenter extends Presenter
 {
     private int $user_post_id;
 

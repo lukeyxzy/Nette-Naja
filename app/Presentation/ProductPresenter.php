@@ -10,7 +10,7 @@ use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait
 use Nette\Database\Table\ActiveRow;
 use App\Model\Entity\Resource;
 
-class ProductPresenter extends BasePresenter
+abstract class ProductPresenter extends Presenter
 {
 
     use detailPresenterTrait;

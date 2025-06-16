@@ -19,6 +19,6 @@ final class RouterFactory
 		$admin->addRoute('login', 'Sign:in');
 		$admin->addRoute('product/<id>', 'Product:default');
 		$admin->addRoute('<presenter>/<action>', 'Home:default');
-		return $router;
+		return $admin;
 	}
 }
