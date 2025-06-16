@@ -6,7 +6,7 @@ namespace App\Presentation;
 
 use App\Components\Category\Detail\PresenterTrait as CategoryDetailTrait;
 use App\Components\Product\Grid\PresenterTrait as ProductGridTrait;
-final class CategoryPresenter extends BasePresenter
+class CategoryPresenter extends BasePresenter
 {
     private int $category_id;
 

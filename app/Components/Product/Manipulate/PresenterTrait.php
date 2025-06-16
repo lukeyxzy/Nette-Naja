@@ -12,8 +12,8 @@ trait PresenterTrait{
 
 
     public function createComponentManipulateProduct(): Control {
-        $this->user_id = $this->user->getIdentity()->getId();
-        return $this->manipulateControlFactory->create([$this, "onSuccessManipulate"], $this->productToArray, $this->user_id);
+        $user_id = $this->user->getIdentity()->getId();
+        return $this->manipulateControlFactory->create([$this, "onSuccessManipulate"], $this->productToArray, $user_id);
     }
 
     public function onSuccessManipulate() {

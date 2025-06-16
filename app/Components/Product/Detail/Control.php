@@ -2,7 +2,6 @@
 
 namespace App\Components\Product\Detail;
 
-use App\Model\ProductManager;
 use App\Model\Entity\Resource;
 use Nette\Application\UI\Control as NetteControl;
 use Nette\Database\Table\ActiveRow;
@@ -10,13 +9,12 @@ use Nette\Database\Table\ActiveRow;
 
 class Control extends NetteControl {
 
-    private ActiveRow $product;
-    public function __construct(private ProductManager $productManager,private Resource $productResource, private int $product_id) {}
+    public function __construct(private Resource $productResource, private ActiveRow $product) {}
 
 
 
     public function render() {
-        $this->product = $this->productManager->getById($this->product_id);
+        $this->product = $this->product;
         $this->template->productResource =  $this->productResource;
         $this->template->product = $this->product;
         $this->template->render(__DIR__ . "/default.latte");

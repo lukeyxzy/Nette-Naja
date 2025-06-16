@@ -25,10 +25,13 @@
 			
 			</div>
 			<div class="col-6 text-end">
-			<a class="btn btn-success" n:if="$user->isAllowed('product', 'add')" n:href="Product:add">Přidat produkt</a>
-			<a class="btn btn-success" n:if="$user->isAllowed('product', 'add')" n:href="Product:add">Přidat kategorii</a>
+			{if $user->isAllowed("adminSide", "view")}
+			<a n:href=":admin:home:default" class="btn btn-primary">ADMINISTRACE</a>
+			{/if}
 			{if $user->isAllowed('frontSide', 'logout')}
-			<a n:if="$user->isAllowed('frontSide', 'logout')" n:href="sign:out" class="btn btn-primary">Odhlásit se</a>
+			<a class="btn btn-success" n:href="product:add">Přidat Produkt</a>
+			<a n:href="user:default $user->getIdentity()->id" class="btn btn-warning" >Váš profil</a>
+			<a  n:href="sign:out" class="btn btn-primary">Odhlásit se</a>
 			{else}
 			<a n:href="sign:in" class="btn btn-primary">Přihlásit se</a>
 			{/if}

@@ -51,6 +51,8 @@ class AuthorizatorFactory {
         $acl->allow("moderator", "review", "delete");
         $acl->allow("moderator", "category", "add");
         $acl->allow("moderator", "category", "delete");
+        $acl->allow("moderator", "adminSide", "view");
+        $acl->allow("moderator", "adminSide", "logout");
 
         $acl->allow("admin");
         return $acl;

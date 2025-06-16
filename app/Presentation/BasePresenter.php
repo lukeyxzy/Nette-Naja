@@ -3,12 +3,22 @@
 declare(strict_types=1);
 
 namespace App\Presentation;
-use Nette\Application\UI\Presenter;
+
 use App\Components\Category\Grid\PresenterTrait as CategoryTrait;
 
-class BasePresenter extends Presenter{
+abstract class BasePresenter extends Presenter{
 
    use CategoryTrait;
+
+    protected function startup() {
+
+    if(!$this->isLinkCurrent("Sign:in") && !$this->user->isAllowed("frontSide", "view")) {
+        $this->flashMessage("Prosím přihlašte se.", "error");
+        $this->redirect("Sign:in");
+    }
+    parent::startup();
+    }
+
     
 }
 

@@ -10,59 +10,48 @@ use App\Components\Product\Manipulate\PresenterTrait AS manipulatePresenterTrait
 use Nette\Database\Table\ActiveRow;
 use App\Model\Entity\Resource;
 
-final class ProductPresenter extends BasePresenter
+class ProductPresenter extends BasePresenter
 {
 
     use detailPresenterTrait;
     use manipulatePresenterTrait;
 
-    
-    private int $user_id;
-    private int $product_id;
+    private Resource $productResource;
     private ActiveRow $product;
-    public function __construct(private ProductManager $productManager) {    }
+    public function __construct(private ProductManager $productManager) {   }
 
-    public function startup(): void {
+
+    public function startup() {
         parent::startup();
-        $this->product_id = (int) $this->getParameter("id");
-        if($this->product_id !== 0) {
-        $this->product = $this->checkProductExistence($this->product_id);
-        $this->productResource = $this->productManager->makeToEntity($this->product);
+        $product_id = (int) $this->getParameter("id");
+
+        if($product_id) {
+                $this->product = $this->checkProductExistence($product_id);
+                $this->productResource = $this->productManager->makeToEntity($this->product);
         }
     }
 
     public function actionDefault(int $id):void {
-            $this->checkAccess($this->productResource, "view");
-            $this->user_id = $this->user->getIdentity() !== null ? $this->user->getIdentity()->id : 0;
+            $this->checkAccess("product", "view");
     }
 
     public function actionAdd():void  {
-        if (!$this->user->isAllowed("product", "add")) {
-            $this->flashMessage("Nemáte oprávnění na tuto akci" ,"error");
-            $this->redirect("sign:in");
-        }
+        $this->checkAccess("product", "add");
     } 
 
-    public function actionEdit(int $product_id):void {
+    public function actionEdit(int $id):void {
         $this->checkAccess($this->productResource, "edit");
-        $this->productToArray = $this->checkProductExistence($product_id)->toArray();
+
     } 
 
-    public function actionDelete(int $product_id): void {
+    public function actionDelete(int $id): void {
         $this->checkAccess($this->productResource, "delete");
-        if ($this->productManager->delete($product_id)){
+        if ($this->productManager->delete($id)){
             $this->flashMessage("Úspěšně odstraněno.");
             $this->redirect("Home:default");
         }
     }
 
-
-    private function checkAccess(Resource $resource, string $action): void  {
-        if(!$this->user->isAllowed($resource, $action)) {
-            $this->flashMessage("Nemáte oprávnění na tuto akci" ,"error");
-            $this->redirect("sign:in");
-        }
-    }   
     private function checkProductExistence(int $id): ActiveRow {
         $product = $this->productManager->getById($id);
         if(!$product) {

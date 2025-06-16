@@ -15,7 +15,7 @@ trait PresenterTrait{
      }
     
     public function createComponentProductDetail(): Control {
-        return $this->controlFactory->create($this->productResource, $this->product_id);
+        return $this->controlFactory->create($this->productResource, $this->product);
     }
 
 }
