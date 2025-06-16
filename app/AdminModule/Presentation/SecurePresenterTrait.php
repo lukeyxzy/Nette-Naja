@@ -7,9 +7,9 @@ trait SecurePresenterTrait{
 
     public function startup() {
 
-    if(!$this->isLinkCurrent("Sign:in") && !$this->user->isAllowed("adminSide", "view")) {
+    if(!$this->user->isAllowed("adminSide", "view")) {
         $this->flashMessage("Prosím přihlašte se.", "error");
-        $this->redirect("Sign:in");
+        $this->redirect(":front:sign:in");
     }
     parent::startup();
     }

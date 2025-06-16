@@ -9,9 +9,7 @@ class ProductPresenter extends APProductPresenter {
     use SecurePresenterTrait;
 
 
-    public function startup() {
-        parent::startup();
-    }
+
 
 
 }

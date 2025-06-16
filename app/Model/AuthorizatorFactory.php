@@ -46,7 +46,7 @@ class AuthorizatorFactory {
         $acl->allow("user", "product", "delete", [self::class, "checkResourcePermission"]);
 
 
-
+        $acl->deny("moderator", "product", "add");
         $acl->allow("moderator", "product", "delete");
         $acl->allow("moderator", "review", "delete");
         $acl->allow("moderator", "category", "add");
