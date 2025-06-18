@@ -5,7 +5,6 @@ use App\Model\ProductManager;
 use App\Model\CategoryManager;
 use Nette\Application\UI\Control as NetteControl;
 use Nette\Application\UI\Form;
-use Nette\Database\Table\ActiveRow;
 
 class Control extends NetteControl {
 

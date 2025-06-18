@@ -19,9 +19,9 @@ class Control extends NetteControl{
     private Selection $reviews;
     private $callback;
     private int $numberOfReviews;
-    public function __construct(private ReviewManager $reviewManager, private ItemControlFactory $controlFactory, private int $user_id,  callable $callback, private User $loggedInUser) {
+    public function __construct(private ReviewManager $reviewManager, private ItemControlFactory $controlFactory, int $user_post_id,  callable $callback, private User $loggedInUser) {
         $this->callback = $callback;
-        $this->reviews = $this->reviewManager->getByColumnName("reviewed_user_id", $this->user_id);
+        $this->reviews = $this->reviewManager->getByColumnName("reviewed_user_id", $user_post_id);
         $this->numberOfReviews = $this->reviews->count("*");
     }
    

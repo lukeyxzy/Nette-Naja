@@ -14,7 +14,6 @@ class Control extends NetteControl {
 
 
     public function render() {
-        $this->product = $this->product;
         $this->template->productResource =  $this->productResource;
         $this->template->product = $this->product;
         $this->template->render(__DIR__ . "/default.latte");

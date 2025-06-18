@@ -24,7 +24,7 @@ class Control extends NetteControl{
     public bool $appendMode = false;
 
     private Selection $products;
-    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory,  int $category_id,  int $user_id) {
+    public function __construct(private ProductManager $productManager, private ItemControlFactory $controlFactory, int $category_id, int $user_id) {
 
         $this->products = $this->getProducts($category_id, $user_id);
     }

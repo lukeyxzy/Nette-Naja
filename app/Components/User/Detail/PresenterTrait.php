@@ -12,7 +12,7 @@ trait PresenterTrait{
      
 
     public function createComponentUserDetail(): Control {
-        return $this->controlFactory->create($this->user_post_id);
+        return $this->controlFactory->create($this->userEntity);
     }
 
 }
